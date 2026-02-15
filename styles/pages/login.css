@@ -1,4 +1,23 @@
 .ld-login > .ld-wrapper {
     max-width: var(--ld-main-wrapper);
+    margin: 0 auto;
+}
+
+.ld-login > .ld-wrapper > .ld-header {
+    height: 70px;
+    width: 100%;
+    background-color: green;
+}
+
+.ld-login > .ld-wrapper > .main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.ld-login > .ld-wrapper > .main-content > .left {
     background-color: blue;
+}
+
+.ld-login > .ld-wrapper > .main-content > .right {
+    background-color: red;
 }
