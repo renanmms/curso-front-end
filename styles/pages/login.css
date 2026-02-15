@@ -1,0 +1,4 @@
+.ld-login > .ld-wrapper {
+    max-width: var(--ld-main-wrapper);
+    background-color: blue;
+}
