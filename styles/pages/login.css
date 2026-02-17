@@ -4,14 +4,25 @@
 }
 
 .ld-login > .ld-wrapper > .ld-header {
-    height: 70px;
+    height: var(--ld-header-size);
     width: 100%;
     background-color: green;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
+    position: fixed;
+    left: 0;
+    top: 0;
 }
+
+.ld-login > .ld-wrapper > .ld-header > .wrapper {
+    max-width: var(--ld-main-wrapper);
+    margin: 0 auto;
+    background-color:lightgreen;
+ }
 
 .ld-login > .ld-wrapper > .main-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    padding-top: var(--ld-header-size);
 }
 
 .ld-login > .ld-wrapper > .main-content > .left {
