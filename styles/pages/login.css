@@ -39,8 +39,20 @@
 
 .ld-login > .ld-wrapper > .main-content > .left {
     background-color: blue;
+    padding: 48px;
 }
 
 .ld-login > .ld-wrapper > .main-content > .right {
-    background-color: red;
+    overflow: hidden;
+    position: relative;
+    height: 100vh;
+}
+
+.ld-login > .ld-wrapper > .main-content > .right > .image {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    min-width: 100%;
+    transform: translateX(-50%);
 }
