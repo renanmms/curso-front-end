@@ -15,12 +15,32 @@
 
 .ld-radio > .checkmark {
     display: inline-block;
-    background-color: var(--ld-color-gray-dark);
     border-radius: 50%;
     height: var(--ld-checkmark-size);
     width: var(--ld-checkmark-size);
-    border: 2px solid red;
+    border: 2px solid var(--ld-color-gray-dark);
     position: absolute;
     top: 0;
     left: 0;
+}
+
+.ld-radio > input:checked ~ .checkmark {
+    background-color: white;
+    border-color: var(--ld-primary-color);
+}
+
+.ld-radio > .checkmark:after {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    position: absolute;
+    content: "";
+    top: 3px;
+    left: 3px;
+    background-color: var(--ld-primary-color);
+    display: none;
+}
+
+.ld-radio > input:checked ~ .checkmark::after {
+    display: block;
 }
