@@ -54,11 +54,29 @@
 
             <main class="main-content">
                 <div class="left">
-                    <label class="ld-radio">
-                        Dev
-                        <input type="radio">
-                        <span class="checkmark"></span>
-                    </label>
+                    <div class="select-role">
+                        <h3 class="title">Qual o seu perfil?</h3>
+                        <div class="radio-buttons">
+                            <label class="ld-radio">
+                                Dev
+                                <input name="role" type="radio">
+                                <span class="checkmark"></span>
+                            </label>
+        
+                            <label class="ld-radio">
+                                Cliente
+                                <input name="role" type="radio">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <input class="ld-input" type="text" placeholder="Nome completo">
+                    <input class="ld-input" type="date" placeholder="Data de nascimento">
+                    <input class="ld-input" type="text" placeholder="Email">
+                    <input class="ld-input" type="text" placeholder="Senha">
+
+                    <button class="ld-button">Continuar</button>
                 </div>
                 <div class="right">
                     <img class="image" src="assets/image/bg-cubes.png" alt="Decoration background with 3 cubes">

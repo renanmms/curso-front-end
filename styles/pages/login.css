@@ -1,0 +1,13 @@
+.ld-login > .ld-wrapper > .main-content > .left > .select-role {
+    margin-bottom: 42px;
+}
+
+.ld-login > .ld-wrapper > .main-content > .left > .select-role > .title {
+    font-size: var(--ld-font-size-base) + 8px;
+    font-weight: 800;
+    margin-bottom: 32px;
+}
+
+.ld-login > .ld-wrapper > .main-content > .left > .select-role > .radio-buttons > .ld-radio {
+    margin-right: 70px;
+}
