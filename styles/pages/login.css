@@ -1,10 +1,37 @@
+.ld-login > .ld-wrapper > .main-content > .left {
+    max-width: 540px;
+    margin: 0 auto;
+}
+
 .ld-login > .ld-wrapper > .main-content > .left > .select-role {
     margin-bottom: 42px;
 }
 
+.ld-login > .ld-wrapper > .main-content > .left > .select-role > .steps {
+    font-weight: var(--ld-font-weight);
+    display: block;
+    color: var(--ld-color-gray);
+    margin-bottom: 14px;
+}
+
+.ld-login > .ld-wrapper > .main-content > .left > .select-role > .main-title {
+    font-weight: var(--ld-font-weight);
+    margin-bottom: 40px;
+}
+
+.ld-login > .ld-wrapper > .main-content > .left > .select-role > .main-title > .up {
+    font-size: calc(var(--ld-font-size-base) + 38px);
+    display: block;
+    margin-bottom: 7px;
+}
+
+.ld-login > .ld-wrapper > .main-content > .left > .select-role > .main-title > .down {
+    font-size: calc(var(--ld-font-size-base) + 22px);
+}
+
 .ld-login > .ld-wrapper > .main-content > .left > .select-role > .title {
     font-size: var(--ld-font-size-base) + 8px;
-    font-weight: 800;
+    font-weight: var(--ld-font-weight);
     margin-bottom: 32px;
 }
 
