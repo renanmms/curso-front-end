@@ -1,3 +1,23 @@
 .ld-list > .ld-wrapper > .main-content {
-    background-color: red;
+    
+}
+
+.ld-list > .ld-wrapper > .main-content > .title-button {
+    margin-top: 70px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.ld-list > .ld-wrapper > .main-content > .title-button > .title {
+    font-weight: calc(var(--ld-font-weight) - 100) ;
+    font-size: calc(var(--ld-font-size-base) + 30px);  
+}
+
+.ld-list > .ld-wrapper > .main-content > .title-button > .button-wrapper {
+    
+}
+
+.ld-list > .ld-wrapper > .main-content > .table-wrapper {
+    margin-top: 32px;
 }
