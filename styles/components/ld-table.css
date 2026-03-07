@@ -1,0 +1,27 @@
+.ld-table {
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px var(--ld-color-gray);
+    background-color: var(--ld-color-gray-lighter);
+    padding: 24px 32px;
+}
+
+.ld-table > .head {
+    color: var(--ld-color-gray-light);
+    font-weight: calc(var(--ld-font-weight) - 200);
+    font-size: calc(var(--ld-font-size-base) + 6px);
+}
+
+.ld-table > .head > .row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 200px;
+}
+
+.ld-table > .body {
+
+}
+
+.ld-table > .body > .row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 200px;
+    padding: 24px 0;
+}
