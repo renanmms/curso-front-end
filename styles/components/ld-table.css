@@ -8,7 +8,7 @@
 .ld-table > .head {
     color: var(--ld-color-gray-light);
     font-weight: calc(var(--ld-font-weight) - 200);
-    font-size: calc(var(--ld-font-size-base) + 6px);
+    font-size: calc(var(--ld-font-size-base) + 8px);
 }
 
 .ld-table > .head > .row {
@@ -45,4 +45,19 @@
 .ld-table > .body > .row > .total-cost {
     font-family: 'Roboto', sans-serif;
     font-weight: calc(var(--ld-font-weight) - 300);
+}
+
+.ld-table > .body > .row  > .actions {
+    
+}
+
+.ld-table > .body > .row  > .actions > .edit {
+    color: var(--ld-primary-color);
+    cursor: pointer;
+}
+
+.ld-table > .body > .row  > .actions > .delete {
+    color: var(--ld-color-danger);
+    cursor: pointer;
+    padding-left: 16px;
 }
