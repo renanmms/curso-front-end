@@ -20,7 +20,7 @@
 .ld-wrapper > .main-content > .right {
     overflow: hidden;
     position: relative;
-    height: 100vh;
+    height: calc(100vh - var(--ld-header-size));
 }
 
 .ld-wrapper > .main-content > .right > .image {
@@ -30,4 +30,13 @@
     left: 50%;
     min-width: 100%;
     transform: translateX(-50%);
+}
+
+.ld-wrapper > .main-content > .back-btn {
+    position: fixed;
+    top: calc(var(--ld-header-size) + 38px);
+    font-size: calc(var(--ld-font-size-base) + 60px);
+    cursor: pointer;
+    color: var(--ld-color-gray-dark);
+    text-decoration: none;
 }
