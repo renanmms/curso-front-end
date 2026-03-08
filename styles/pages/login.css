@@ -7,13 +7,6 @@
     margin-bottom: 42px;
 }
 
-.ld-login > .ld-wrapper > .main-content > .left > .select-role > .steps {
-    font-weight: var(--ld-font-weight);
-    display: block;
-    color: var(--ld-color-gray);
-    margin-bottom: 14px;
-}
-
 .ld-login > .ld-wrapper > .main-content > .left > .select-role > .main-title {
     font-weight: var(--ld-font-weight);
     margin-bottom: 40px;
