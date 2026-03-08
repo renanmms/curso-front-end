@@ -37,14 +37,15 @@
     <link rel="stylesheet" href="styles/components/ld-header.css">
 
     <!-- Pages -->
-    <link rel="stylesheet" href="styles/pages/create.css">
+    <link rel="stylesheet" href="styles/pages/project-create-edit.css">
 
     <!-- Trumps -->
 
+    <script src="scripts/project-create-edit.js"></script>
 </head>
 
 <body>
-    <div class="ld-create">
+    <div class="ld-project-create-edit">
         <div class="ld-wrapper">
             <header class="ld-header">
                 <div class="wrapper">
@@ -60,7 +61,7 @@
                 </a>
                 <div class="left">
 
-                    <h1 class="main-title">
+                    <h1 id="main-title" class="main-title">
                         Vamos cadastrar seu novo projeto!
                     </h1>
 
@@ -68,7 +69,7 @@
                     <input class="ld-input" type="text" placeholder="Custo Total">
                     <textarea placeholder="Descrição" class="ld-input"></textarea>
 
-                    <button class="ld-button">Cadastrar</button>
+                    <button id="action-button" class="ld-button">Cadastrar</button>
                 </div>
                 <div class="right">
                     <img class="image" src="assets/image/bg-float-cubes.png"
