@@ -39,6 +39,7 @@
 
     <!-- Trumps -->
 
+    <script src="scripts/login.js"></script>
 </head>
 
 <body>
@@ -53,7 +54,7 @@
             </header>
 
             <main class="main-content">
-                <div class="left">
+                <form class="left" onsubmit="cadastrar()" action="javascript:void(0)">
                     <div class="select-role">
                         <h1 class="main-title">
                             <span class="up">Olá!</span>
@@ -75,13 +76,13 @@
                         </div>
                     </div>
 
-                    <input class="ld-input" type="text" placeholder="Nome completo">
-                    <input class="ld-input" type="date" placeholder="Data de nascimento">
-                    <input class="ld-input" type="email" placeholder="Email">
-                    <input class="ld-input" type="password" placeholder="Senha">
+                    <input class="ld-input" type="text" placeholder="Nome completo" required>
+                    <input class="ld-input" type="date" placeholder="Data de nascimento" required>
+                    <input class="ld-input" type="email" placeholder="Email" required>
+                    <input class="ld-input" type="password" placeholder="Senha" required>
 
-                    <button class="ld-button">Continuar</button>
-                </div>
+                    <button type="submit" class="ld-button">Continuar</button>
+                </form>
                 <div class="right">
                     <img class="image" src="assets/image/bg-cubes.png" alt="Decoration background with 3 cubes">
                 </div>
