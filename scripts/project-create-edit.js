@@ -38,6 +38,7 @@ function cadastrar()
     .then(response => response.json())
     .then(response => {
         alert('Project created successfully!');
+        window.location.href = "//localhost:5500/list.html"
     })
     .catch(error => {
         alert('Internal Server Error');
