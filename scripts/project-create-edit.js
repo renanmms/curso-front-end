@@ -20,7 +20,8 @@ function cadastrar()
     const payload = {
         title: document.querySelector('#title').value.trim(),
         totalCost: Number(document.querySelector('#total-cost').value.trim()),
-        description: document.querySelector('#description').value.trim()
+        description: document.querySelector('#description').value.trim(),
+        idClient: 1
     };
 
     if(!isValid(payload)){
