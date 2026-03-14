@@ -56,25 +56,25 @@
             </header>
 
             <main class="main-content">
-                <a class="back-btn material-icons" href="list.html">
-                    keyboard_arrow_left
-                </a>
-                <div class="left">
+                    <a class="back-btn material-icons" href="list.html">
+                        keyboard_arrow_left
+                    </a>
+                    <form class="left" method="post" onsubmit="cadastrar()" action="javascript:void(0)">
 
-                    <h1 id="main-title" class="main-title">
-                        Vamos cadastrar seu novo projeto!
-                    </h1>
+                        <h1 id="main-title" class="main-title">
+                            Vamos cadastrar seu novo projeto!   
+                        </h1>
 
-                    <input class="ld-input" type="text" placeholder="Título">
-                    <input class="ld-input" type="text" placeholder="Custo Total">
-                    <textarea placeholder="Descrição" class="ld-input"></textarea>
+                        <input id="title" class="ld-input" type="text" placeholder="Título" required>
+                        <input id="total-cost" class="ld-input" type="text" placeholder="Custo Total" required>
+                        <textarea id="description" placeholder="Descrição" class="ld-input" required></textarea>
 
-                    <button id="action-button" class="ld-button">Cadastrar</button>
-                </div>
-                <div class="right">
-                    <img class="image" src="assets/image/bg-float-cubes.png"
-                        alt="Decoration background with float cubes">
-                </div>
+                        <button id="action-button" class="ld-button">Cadastrar</button>
+                    </form>
+                    <div class="right">
+                        <img class="image" src="assets/image/bg-float-cubes.png"
+                            alt="Decoration background with float cubes">
+                    </div>
             </main>
         </div>
     </div>
