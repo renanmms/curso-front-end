@@ -51,6 +51,7 @@ function isValid(payload) {
     const titleIsValid = payload.title !== '';
     const descriptionIsValid = payload.description !== '';
     const totalCostIsValid = Number.isFinite(payload.totalCost);
+    const idClientIsValid = Number.isFinite(payload.idClient);
 
-    return titleIsValid && totalCostIsValid && descriptionIsValid;
+    return titleIsValid && totalCostIsValid && descriptionIsValid && idClientIsValid;
 }
