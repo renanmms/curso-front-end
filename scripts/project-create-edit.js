@@ -1,21 +1,33 @@
-window.onload = function() {
-    const screenType = 'create';
+const ScreenType = {
+    Create: 'create',
+    Edit: 'edit'
+}
 
-    if(screenType == 'create')
+const urlSearchParams = new URLSearchParams(window.location.search);
+const params = Object.fromEntries(urlSearchParams.entries());
+
+let screenType = params.id ? ScreenType.Edit : ScreenType.Create;
+
+window.onload = function() {
+    setScreenTypeTexts();    
+}
+
+function setScreenTypeTexts() {
+    if(screenType == ScreenType.Create)
     {
         document.querySelector('#main-title').innerText = "Vamos cadastrar seu novo projeto!";
         document.querySelector('#action-button').innerText = "Cadastrar";
     }
     
-    // if(screenType == 'edit')
-    // {
-    //     document.querySelector('#main-title').innerText = "Editar projeto";
-    //     document.querySelector('#action-button').innerText = "Salvar";
-    // }
+    if(screenType == ScreenType.Edit)
+    {
+        document.querySelector('#main-title').innerText = "Editar projeto";
+        document.querySelector('#action-button').innerText = "Salvar";
+    }
 }
 
 
-function cadastrar()
+function createOrEdit()
 {
     const payload = {
         title: document.querySelector('#title').value.trim(),
@@ -23,14 +35,17 @@ function cadastrar()
         description: document.querySelector('#description').value.trim(),
         idClient: 1
     };
-
+    
     if(!isValid(payload)){
         alert('Project is not valid!');
         return;
     }
 
-    fetch('https://69adb822b50a169ec88017c7.mockapi.io/api/projects', {
-        method: 'POST',
+    let queryParam = screenType === ScreenType.Edit ? `${params.id}` : ''; 
+    let httpMethod = screenType === ScreenType.Edit ? 'PUT' : 'POST';
+
+    fetch(`https://69adb822b50a169ec88017c7.mockapi.io/api/projects/${queryParam}`, {
+        method: httpMethod,
         body: JSON.stringify(payload),
         headers: {
             'Content-Type': 'application/json'
@@ -38,8 +53,12 @@ function cadastrar()
     })
     .then(response => response.json())
     .then(response => {
-        alert('Project created successfully!');
-        window.location.href = "//localhost:5500/list.html"
+        if(screenType === ScreenType.Edit) {
+            alert('Project edited successfully!');
+        } else {
+            alert('Project created successfully!');
+            window.location.href = "//localhost:5500/list.html"
+        }
     })
     .catch(error => {
         alert('Internal Server Error');
