@@ -26,7 +26,12 @@ function cadastrar() {
     })
     .then(response => response.json())
     .then(response => {
+        localStorage.setItem('username', response.fullName);
+        localStorage.setItem('role', getRole(payload));
+        
         alert('Created successfully!');
+
+        window.location.href = "list.html";
     })
     .catch(error => {
         alert('Internal Server Error');
@@ -52,4 +57,8 @@ function checkIfAnyRoleIsChecked() {
 
 function getSelectedRole() {
     return document.getElementsByName('role')[0].checked === true ? Role.Dev : Role.Client;
+}
+
+function getRole(payload){
+    return payload.role === Role.Dev ? 'Desenvolvedor' : 'Cliente';
 }
