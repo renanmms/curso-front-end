@@ -2,9 +2,10 @@ getProjects();
 
 document.querySelector('#name').innerText = localStorage.getItem('username');
 document.querySelector('#role').innerText = localStorage.getItem('role');
-document.querySelector('#new-project').addEventListener('click', () => {
+
+function redirectToCreateProject() {
     window.location.href = 'project-create-edit.html';
-});
+}
 
 function getProjects() {
     fetch('https://69adb822b50a169ec88017c7.mockapi.io/api/projects')
