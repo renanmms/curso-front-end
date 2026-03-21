@@ -9,7 +9,22 @@ const params = Object.fromEntries(urlSearchParams.entries());
 let screenType = params.id ? ScreenType.Edit : ScreenType.Create;
 
 window.onload = function() {
-    setScreenTypeTexts();    
+    setScreenTypeTexts();
+    fillInputs();
+}
+
+function fillInputs() {
+    if(screenType === ScreenType.Edit) {
+        fetch(`https://69adb822b50a169ec88017c7.mockapi.io/api/projects/${params.id}`, {
+        method: 'GET'
+        })
+        .then(response => response.json())
+        .then(project => {
+            document.querySelector('#title').value = project.title;
+            document.querySelector('#total-cost').value = project.totalCost;
+            document.querySelector('#description').value = project.description;
+        })
+    }
 }
 
 function setScreenTypeTexts() {
