@@ -35,11 +35,11 @@ function deleteProject(id) {
 }
 
 function buildTable() {
-    console.log('cleaning table body...');
     document.querySelector('#table-body').innerHTML = '';
+    const idClient = localStorage.getItem('idClient');
 
+    list = list.filter(el => el.idClient === idClient);
 
-    console.log('building table...');
     list.forEach(element => {
         let template = 
                     `<div class="row">
