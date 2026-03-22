@@ -51,7 +51,12 @@ function createOrEdit() {
     let result = validate(payload);
 
     if (!result.isSuccess) {
-        alert(result.errorMessages.join('\n'));
+        Swal.fire({
+            title: 'Validation Error!',
+            text: result.errorMessages.join('\n'),
+            icon: 'error',
+            confirmButtonText: 'Continue'
+        });
         return;
     }
 
@@ -68,14 +73,30 @@ function createOrEdit() {
         .then(response => response.json())
         .then(response => {
             if (screenType === ScreenType.Edit) {
-                alert('Project edited successfully!');
+                Swal.fire({
+                    title: "Success!",
+                    text: "Project was edited successfully!",
+                    icon: "success",
+                    confirmButtonText: "OK"
+                    }).then((result) => {
+                        if(result.isConfirmed) {
+                            window.location.href = "list.html";
+                        }
+                    });
             } else {
-                alert('Project created successfully!');
-                window.location.href = "//localhost:5500/list.html"
+                Swal.fire({
+                    title: "Success!",
+                    text: "Project was created successfully!",
+                    icon: "success",
+                    confirmButtonText: "OK"
+                    }).then((result) => {
+                        if(result.isConfirmed) {
+                            window.location.href = "list.html";
+                        }
+                    });
             }
         })
         .catch(error => {
-            alert('Internal Server Error');
             console.log(error);
         });
 }

@@ -4,8 +4,14 @@ const Role = {
 };
 
 function cadastrar() {
+
     if(!checkIfAnyRoleIsChecked()) {
-        alert('Please select a role!');
+        Swal.fire({
+            title: 'Error!',
+            text: 'Please select a role!',
+            icon: 'error',
+            confirmButtonText: 'Continue'
+        });
         return;
     }
     
@@ -25,17 +31,29 @@ function cadastrar() {
         }   
     })
     .then(response => response.json())
-    .then(response => {
-        localStorage.setItem('username', response.fullName);
-        localStorage.setItem('role', getRole(payload));
-        localStorage.setItem('idClient', response.id);
-        
-        alert('Created successfully!');
+    .then(response => {         
+        Swal.fire({
+            title: "Success!",
+            text: "User was created successfully!",
+            icon: "success",
+            confirmButtonText: "OK"
+            }).then((result) => {
+                if(result.isConfirmed) {
+                    localStorage.setItem('username', response.fullName);
+                    localStorage.setItem('role', getRole(payload));
+                    localStorage.setItem('idClient', response.id);
 
-        window.location.href = "list.html";
+                    window.location.href = "list.html";
+                }
+            });
     })
     .catch(error => {
-        alert('Internal Server Error');
+        Swal.fire({
+            title: 'Error!',
+            text: 'Internal Server Error',
+            icon: 'error',
+            confirmButtonText: 'Continue'
+        });
         console.log(error);
     });
 }
