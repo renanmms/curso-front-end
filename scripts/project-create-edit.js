@@ -73,27 +73,9 @@ function createOrEdit() {
         .then(response => response.json())
         .then(response => {
             if (screenType === ScreenType.Edit) {
-                Swal.fire({
-                    title: "Success!",
-                    text: "Project was edited successfully!",
-                    icon: "success",
-                    confirmButtonText: "OK"
-                    }).then((result) => {
-                        if(result.isConfirmed) {
-                            window.location.href = "list.html";
-                        }
-                    });
+                showSuccessMessage('Project was edited successfully!');
             } else {
-                Swal.fire({
-                    title: "Success!",
-                    text: "Project was created successfully!",
-                    icon: "success",
-                    confirmButtonText: "OK"
-                    }).then((result) => {
-                        if(result.isConfirmed) {
-                            window.location.href = "list.html";
-                        }
-                    });
+                showSuccessMessage('Project was created successfully!');
             }
         })
         .catch(error => {
@@ -148,4 +130,17 @@ function checkForErrorMessages(validations) {
     }
 
     return errorMessages;
+}
+
+function showSuccessMessage(message) {
+    Swal.fire({
+        title: "Success!",
+        text: message,
+        icon: "success",
+        confirmButtonText: "OK"
+    }).then((result) => {
+        if(result.isConfirmed) {
+            window.location.href = "list.html";
+        }
+    });
 }
