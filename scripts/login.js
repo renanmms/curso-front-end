@@ -28,6 +28,7 @@ function cadastrar() {
     .then(response => {
         localStorage.setItem('username', response.fullName);
         localStorage.setItem('role', getRole(payload));
+        localStorage.setItem('idClient', response.id);
         
         alert('Created successfully!');
 
