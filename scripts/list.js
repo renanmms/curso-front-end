@@ -1,6 +1,6 @@
 let list = [];
 
-document.querySelector("#name").innerText = localStorage.getItem("userName");
+document.querySelector("#name").innerText = localStorage.getItem("username");
 document.querySelector("#role").innerText = localStorage.getItem("role");
 
 getProjects();
