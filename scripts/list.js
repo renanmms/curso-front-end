@@ -28,9 +28,26 @@ function deleteProject(id) {
     })
     .then(response => response.json())
     .then(response => {
-        list = list.filter(project => project.id !== String(id));
+       Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#004CD8",
+                cancelButtonColor: "#FF2222",
+                confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your project has been deleted.",
+                        icon: "success"
+                    });
 
-        buildTable();
+                    list = list.filter(project => project.id !== String(id));
+                    buildTable();
+                }
+        });
     });
 }
 
