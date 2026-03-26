@@ -10,11 +10,13 @@ function redirectToCreateProject() {
 }
 
 function getProjects() {
+    showLoader();
     fetch('https://69adb822b50a169ec88017c7.mockapi.io/api/projects')
     .then(response => response.json())
     .then(response => {
         list = response;
         buildTable();
+        hideLoader();
     });
 }
 
@@ -77,4 +79,12 @@ function buildTable() {
 
         document.querySelector('#table-body').insertAdjacentHTML('beforeend', template);
     });
+}
+
+function showLoader() {
+    document.querySelector('#loader').style.display = 'flex';
+}
+
+function hideLoader() {
+    document.querySelector('#loader').style.display = 'none';
 }
