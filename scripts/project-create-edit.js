@@ -15,7 +15,7 @@ window.onload = function () {
 
 function fillInputs() {
     if (screenType === ScreenType.Edit) {
-        fetch(`https://69adb822b50a169ec88017c7.mockapi.io/api/projects/${params.id}`, {
+        fetch(`https://localhost:7261/api/projects/${params.id}`, { // TODO: Change to Local API
             method: 'GET'
         })
             .then(response => response.json())
@@ -63,7 +63,7 @@ function createOrEdit() {
     let queryParam = screenType === ScreenType.Edit ? `${params.id}` : '';
     let httpMethod = screenType === ScreenType.Edit ? 'PUT' : 'POST';
 
-    fetch(`https://69adb822b50a169ec88017c7.mockapi.io/api/projects/${queryParam}`, {
+    fetch(`https://localhost:7261/api/projects/${queryParam}`, { // TODO: Change to DevFreela API
         method: httpMethod,
         body: JSON.stringify(payload),
         headers: {

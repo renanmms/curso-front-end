@@ -23,7 +23,7 @@ function cadastrar() {
         role: getSelectedRole()
     };
 
-    fetch('https://69adb822b50a169ec88017c7.mockapi.io/api/users', {
+    fetch('https://localhost:7261/api/users', { // TODO: Change to Local API
         method: 'POST',
         body: JSON.stringify(payload),
         headers: {

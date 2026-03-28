@@ -11,7 +11,7 @@ function redirectToCreateProject() {
 
 function getProjects() {
     showLoader();
-    fetch('https://69adb822b50a169ec88017c7.mockapi.io/api/projects')
+    fetch('https://localhost:7261/api/projects')
     .then(response => response.json())
     .then(response => {
         list = response;
@@ -25,7 +25,7 @@ function goToEdit(id) {
 }
 
 function deleteProject(id) {
-    fetch(`https://69adb822b50a169ec88017c7.mockapi.io/api/projects/${id}`, {
+    fetch(`https://localhost:7261/api/projects/${id}`, { // TODO: Change to Local API
         method: 'DELETE'
     })
     .then(response => response.json())
