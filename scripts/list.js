@@ -12,12 +12,33 @@ function redirectToCreateProject() {
 function getProjects() {
     showLoader();
     fetch('https://localhost:7261/api/projects')
-    .then(response => response.json())
-    .then(response => {
-        list = response;
-        buildTable();
-        hideLoader();
-    });
+        .then(response => {
+            if (!response.ok) {
+                Swal.fire({
+                    title: 'HTTP Error!',
+                    text: `Status: ${response.status}`,
+                    icon: 'error',
+                    confirmButtonText: 'Continue'
+                });
+            }
+            return response.json();
+        })
+        .then(response => {
+            list = response;
+            buildTable();
+        })
+        .catch(error => {
+            Swal.fire({
+                title: 'Error!',
+                text: `Internal Server Error: ${error}`,
+                icon: 'error',
+                confirmButtonText: 'Continue'
+            });
+            console.log(error);
+        })
+        .finally(() => {
+            hideLoader();
+        });
 }
 
 function goToEdit(id) {
@@ -28,9 +49,9 @@ function deleteProject(id) {
     fetch(`https://localhost:7261/api/projects/${id}`, { // TODO: Change to Local API
         method: 'DELETE'
     })
-    .then(response => response.json())
-    .then(response => {
-       Swal.fire({
+        .then(response => response.json())
+        .then(response => {
+            Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
                 icon: "warning",
@@ -38,7 +59,7 @@ function deleteProject(id) {
                 confirmButtonColor: "#004CD8",
                 cancelButtonColor: "#FF2222",
                 confirmButtonText: "Yes, delete it!"
-                }).then((result) => {
+            }).then((result) => {
                 if (result.isConfirmed) {
                     Swal.fire({
                         title: "Deleted!",
@@ -49,8 +70,8 @@ function deleteProject(id) {
                     list = list.filter(project => project.id !== String(id));
                     buildTable();
                 }
+            });
         });
-    });
 }
 
 function buildTable() {
@@ -60,8 +81,8 @@ function buildTable() {
     list = list.filter(el => el.idClient === idClient);
 
     list.forEach(element => {
-        let template = 
-                    `<div class="row">
+        let template =
+            `<div class="row">
                         <div class="title-description">
                             <h6 class="title">${element.title}</h6>
                             <p class="description">${element.description}</p>
