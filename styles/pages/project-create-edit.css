@@ -13,3 +13,22 @@
     max-width: 480px;
     margin: auto;
 }
+
+.ld-project-create-edit > .ld-wrapper > .main-content > .left > label {
+    font-size: calc(var(--ld-font-size-base) + 8px);
+    color: var(--ld-color-gray-dark);
+}
+
+.ld-project-create-edit > .ld-wrapper > .main-content > .left > #freelancers {
+    display: block;
+    font-family: var(--ld-font-family-base);
+    font-size: calc(var(--ld-font-size-base) + 8px);
+    margin-top: 16px;
+    border: none;
+    background: none;
+    border-bottom: 1px solid var(--ld-color-gray-light);
+    outline: none;
+    transition: border-color .5s;
+    color: var(--ld-color-gray-dark);
+    width: 100%;
+}
