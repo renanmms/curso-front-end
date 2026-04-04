@@ -16,11 +16,6 @@ function login() {
     })
     .then(response => response.json())
     .then(response => {         
-        console.log(`Setting response to localStorage...`);
-        console.log(`response.fullName = ${response.fullName}`);
-        console.log(`response.token = ${response.token}`);
-        console.log(`response.role = ${response.role}`);
-        console.log(`response.idClient = ${response.idClient}`);
         Swal.fire({
             title: "Success!",
             text: "Login successfully!",
