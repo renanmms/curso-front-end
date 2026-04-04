@@ -10,6 +10,7 @@ const screenType = params.id ? ScreenType.Edit : ScreenType.Create;
 
 window.onload = function () {
     setScreenTypeTexts();
+    setFreelancersForSelection();
     fillInputs();
 }
 
@@ -40,6 +41,19 @@ function setScreenTypeTexts() {
         document.querySelector('#main-title').innerText = "Editar projeto";
         document.querySelector('#action-button').innerText = "Salvar";
     }
+}
+
+function setFreelancersForSelection() {
+    fetch(`https://localhost:7261/api/users/freelancers`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(response => response.json())
+            .then(freelancers => {
+                console.log(freelancers);
+            })
 }
 
 
