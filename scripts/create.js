@@ -30,7 +30,6 @@ function cadastrar() {
             'Content-Type': 'application/json'
         }   
     })
-    .then(response => response.json())
     .then(response => {         
         Swal.fire({
             title: "Success!",
@@ -39,11 +38,7 @@ function cadastrar() {
             confirmButtonText: "OK"
             }).then((result) => {
                 if(result.isConfirmed) {
-                    localStorage.setItem('username', response.fullName);
-                    localStorage.setItem('role', getRole(payload));
-                    localStorage.setItem('idClient', response.id);
-
-                    window.location.href = "list.html";
+                    window.location.href = "login.html";
                 }
             });
     })
