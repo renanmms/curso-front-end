@@ -1,6 +1,6 @@
 const Role = {
-    Dev: 'Dev',
-    Client: 'Client'
+    Dev: 'freelancer',
+    Client: 'client'
 };
 
 function cadastrar() {
