@@ -11,7 +11,12 @@ function redirectToCreateProject() {
 
 function getProjects() {
     showLoader();
-    fetch('https://localhost:7261/api/projects')
+    fetch('https://localhost:7261/api/projects', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    })
         .then(response => {
             if (!response.ok) {
                 Swal.fire({
@@ -46,8 +51,11 @@ function goToEdit(id) {
 }
 
 function deleteProject(id) {
-    fetch(`https://localhost:7261/api/projects/${id}`, { // TODO: Change to Local API
-        method: 'DELETE'
+    fetch(`https://localhost:7261/api/projects/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
     })
         .then(response => response.json())
         .then(response => {

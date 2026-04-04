@@ -23,7 +23,7 @@ function cadastrar() {
         role: getSelectedRole()
     };
 
-    fetch('https://localhost:7261/api/users', { // TODO: Change to Local API
+    fetch('https://localhost:7261/api/users', {
         method: 'POST',
         body: JSON.stringify(payload),
         headers: {

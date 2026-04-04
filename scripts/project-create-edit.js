@@ -15,8 +15,11 @@ window.onload = function () {
 
 function fillInputs() {
     if (screenType === ScreenType.Edit) {
-        fetch(`https://localhost:7261/api/projects/${params.id}`, { // TODO: Change to Local API
-            method: 'GET'
+        fetch(`https://localhost:7261/api/projects/${params.id}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
         })
             .then(response => response.json())
             .then(project => {
@@ -63,15 +66,17 @@ function createOrEdit() {
     let queryParam = screenType === ScreenType.Edit ? `${params.id}` : '';
     let httpMethod = screenType === ScreenType.Edit ? 'PUT' : 'POST';
 
-    fetch(`https://localhost:7261/api/projects/${queryParam}`, { // TODO: Change to DevFreela API
+    fetch(`https://localhost:7261/api/projects/${queryParam}`, {
         method: httpMethod,
         body: JSON.stringify(payload),
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
     })
         .then(response => response.json())
         .then(response => {
+            // TODO: Validate response status code
             if (screenType === ScreenType.Edit) {
                 showSuccessMessage('Project was edited successfully!');
             } else {
