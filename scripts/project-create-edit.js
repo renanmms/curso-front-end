@@ -50,10 +50,13 @@ function setFreelancersForSelection() {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         })
-            .then(response => response.json())
-            .then(freelancers => {
-                console.log(freelancers);
-            })
+        .then(response => response.json())
+        .then(freelancers => {
+            freelancers.forEach(freelancer => {
+                let template = `<option value="${freelancer.id}">${freelancer.fullName}</option>`
+                document.querySelector('#freelancers').insertAdjacentHTML('beforeend', template);
+            });
+        })
 }
 
 
