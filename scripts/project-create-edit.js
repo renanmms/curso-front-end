@@ -65,7 +65,8 @@ function createOrEdit() {
         title: document.querySelector('#title').value.trim(),
         totalCost: Number(document.querySelector('#total-cost').value.trim()),
         description: document.querySelector('#description').value.trim(),
-        idClient: localStorage.getItem('idClient')
+        idClient: localStorage.getItem('idClient'),
+        idFreelancer: document.querySelector('#freelancers').value
     };
 
     let result = validate(payload);
@@ -111,7 +112,8 @@ function validate(payload) {
         titleIsValid: payload.title !== '',
         descriptionIsValid: payload.description !== '',
         totalCostIsValid: numberIsValid(payload.totalCost),
-        idClientIsValid: numberIsValid(payload.idClient)
+        idClientIsValid: numberIsValid(payload.idClient),
+        idFreelancerIsValid: numberIsValid(payload.idFreelancer)
     }
 
     let result = {
@@ -119,7 +121,8 @@ function validate(payload) {
             validations.titleIsValid &&
             validations.totalCostIsValid &&
             validations.descriptionIsValid &&
-            validations.idClientIsValid,
+            validations.idClientIsValid &&
+            validations.idFreelancerIsValid,
         errorMessages: checkForErrorMessages(validations)
     }
 
@@ -149,6 +152,10 @@ function checkForErrorMessages(validations) {
 
     if (!validations.idClientIsValid) {
         errorMessages = errorMessages.concat('Id client is not valid!');
+    }
+
+    if (!validations.idFreelancerIsValid) {
+        errorMessages = errorMessages.concat('Freelancer is not selected!');
     }
 
     return errorMessages;
