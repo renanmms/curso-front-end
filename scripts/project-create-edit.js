@@ -92,9 +92,21 @@ function createOrEdit() {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
     })
-        .then(response => response.json())
         .then(response => {
-            // TODO: Validate response status code
+            if(!response.ok) {
+                Swal.fire({
+                    title: 'HTTP Error!',
+                    text: `Status: ${response.status}`,
+                    icon: 'error',
+                    confirmButtonText: 'Continue'
+                });
+
+                throw new Error(`HTTP Error: ${response.status}`);
+            }
+
+            return response.json();
+        })
+        .then(response => {
             if (screenType === ScreenType.Edit) {
                 showSuccessMessage('Project was edited successfully!');
             } else {

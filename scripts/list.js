@@ -25,6 +25,7 @@ function getProjects() {
                     icon: 'error',
                     confirmButtonText: 'Continue'
                 });
+                throw new Error(`HTTP Error: ${response.status}`);
             }
             return response.json();
         })
