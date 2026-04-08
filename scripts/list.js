@@ -84,7 +84,7 @@ function deleteProject(id) {
 
 function buildTable() {
     document.querySelector('#table-body').innerHTML = '';
-    const idClient = localStorage.getItem('idClient');
+    const idClient = Number(localStorage.getItem('idClient'));
 
     list = list.filter(el => el.idClient === idClient);
 
