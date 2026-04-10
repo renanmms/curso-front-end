@@ -61,7 +61,6 @@ function deleteProject(id) {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
     })
-        .then(response => response.json())
         .then(response => {
             Swal.fire({
                 title: "Are you sure?",
