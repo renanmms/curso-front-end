@@ -18,6 +18,9 @@ function getProjects() {
         }
     })
         .then(response => {
+            if(response.status == 401) {
+                window.location.href = 'login.html'
+            }
             if (!response.ok) {
                 Swal.fire({
                     title: 'HTTP Error!',
