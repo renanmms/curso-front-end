@@ -55,34 +55,33 @@ function goToEdit(id) {
 }
 
 function deleteProject(id) {
-    fetch(`https://localhost:7261/api/projects/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-    })
-        .then(response => {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#004CD8",
-                cancelButtonColor: "#FF2222",
-                confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: "Your project has been deleted.",
-                        icon: "success"
-                    });
-
-                    list = list.filter(project => project.id !== String(id));
-                    buildTable();
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#004CD8",
+        cancelButtonColor: "#FF2222",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`https://localhost:7261/api/projects/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
+            }).then(() => {
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your project has been deleted.",
+                    icon: "success"
+                });
+
+                list = list.filter(project => String(project.id) !== String(id));
+                buildTable();
             });
-        });
+        }
+    });
 }
 
 function buildTable() {
