@@ -1,30 +1,14 @@
-const Role = {
-    Dev: 'Dev',
-    Client: 'Client'
-};
+function login() {
+    let email = document.querySelector('#email');
+    let password = document.querySelector('#password');
 
-function cadastrar() {
-
-    if(!checkIfAnyRoleIsChecked()) {
-        Swal.fire({
-            title: 'Error!',
-            text: 'Please select a role!',
-            icon: 'error',
-            confirmButtonText: 'Continue'
-        });
-        return;
-    }
-    
     let payload = {
-        fullName: document.querySelector('#fullName').value,
-        birthDate: document.querySelector('#birthDate').value,
         email: document.querySelector('#email').value,
-        password: document.querySelector('#password').value,
-        role: getSelectedRole()
-    };
+        password: document.querySelector('#password').value
+    }
 
-    fetch('https://69adb822b50a169ec88017c7.mockapi.io/api/users', {
-        method: 'POST',
+    fetch('https://localhost:7261/api/users/login', {
+        method: 'PUT',
         body: JSON.stringify(payload),
         headers: {
             'Content-Type': 'application/json'
@@ -34,14 +18,15 @@ function cadastrar() {
     .then(response => {         
         Swal.fire({
             title: "Success!",
-            text: "User was created successfully!",
+            text: "Login successfully!",
             icon: "success",
             confirmButtonText: "OK"
             }).then((result) => {
                 if(result.isConfirmed) {
                     localStorage.setItem('username', response.fullName);
-                    localStorage.setItem('role', getRole(payload));
-                    localStorage.setItem('idClient', response.id);
+                    localStorage.setItem('role', response.role);
+                    localStorage.setItem('idClient', response.idClient);
+                    localStorage.setItem('token', response.token);
 
                     window.location.href = "list.html";
                 }
@@ -56,28 +41,4 @@ function cadastrar() {
         });
         console.log(error);
     });
-}
-
-
-function checkIfAnyRoleIsChecked() {
-    let counter = 0;
-    let list = document.getElementsByName('role');
-
-    for(let radioButton of list) {
-        if(radioButton.checked === false) {
-            counter++;
-        }   
-    }
-
-    let result = counter !== list.length;
-
-    return result;
-}
-
-function getSelectedRole() {
-    return document.getElementsByName('role')[0].checked === true ? Role.Dev : Role.Client;
-}
-
-function getRole(payload){
-    return payload.role === Role.Dev ? 'Desenvolvedor' : 'Cliente';
 }

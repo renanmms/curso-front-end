@@ -10,12 +10,44 @@ function redirectToCreateProject() {
 }
 
 function getProjects() {
-    fetch('https://69adb822b50a169ec88017c7.mockapi.io/api/projects')
-    .then(response => response.json())
-    .then(response => {
-        list = response;
-        buildTable();
-    });
+    showLoader();
+    fetch('https://localhost:7261/api/projects', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    })
+        .then(response => {
+            if(response.status == 401) {
+                window.location.href = 'login.html'
+            }
+            if (!response.ok) {
+                Swal.fire({
+                    title: 'HTTP Error!',
+                    text: `Status: ${response.status}`,
+                    icon: 'error',
+                    confirmButtonText: 'Continue'
+                });
+                throw new Error(`HTTP Error: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(response => {
+            list = response;
+            buildTable();
+        })
+        .catch(error => {
+            Swal.fire({
+                title: 'Error!',
+                text: `Internal Server Error: ${error}`,
+                icon: 'error',
+                confirmButtonText: 'Continue'
+            });
+            console.log(error);
+        })
+        .finally(() => {
+            hideLoader();
+        });
 }
 
 function goToEdit(id) {
@@ -23,43 +55,44 @@ function goToEdit(id) {
 }
 
 function deleteProject(id) {
-    fetch(`https://69adb822b50a169ec88017c7.mockapi.io/api/projects/${id}`, {
-        method: 'DELETE'
-    })
-    .then(response => response.json())
-    .then(response => {
-       Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#004CD8",
-                cancelButtonColor: "#FF2222",
-                confirmButtonText: "Yes, delete it!"
-                }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: "Your project has been deleted.",
-                        icon: "success"
-                    });
-
-                    list = list.filter(project => project.id !== String(id));
-                    buildTable();
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#004CD8",
+        cancelButtonColor: "#FF2222",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`https://localhost:7261/api/projects/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
-        });
+            }).then(() => {
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your project has been deleted.",
+                    icon: "success"
+                });
+
+                list = list.filter(project => String(project.id) !== String(id));
+                buildTable();
+            });
+        }
     });
 }
 
 function buildTable() {
     document.querySelector('#table-body').innerHTML = '';
-    const idClient = localStorage.getItem('idClient');
+    const idClient = Number(localStorage.getItem('idClient'));
 
     list = list.filter(el => el.idClient === idClient);
 
     list.forEach(element => {
-        let template = 
-                    `<div class="row">
+        let template =
+            `<div class="row">
                         <div class="title-description">
                             <h6 class="title">${element.title}</h6>
                             <p class="description">${element.description}</p>
@@ -77,4 +110,12 @@ function buildTable() {
 
         document.querySelector('#table-body').insertAdjacentHTML('beforeend', template);
     });
+}
+
+function showLoader() {
+    document.querySelector('#loader').style.display = 'flex';
+}
+
+function hideLoader() {
+    document.querySelector('#loader').style.display = 'none';
 }

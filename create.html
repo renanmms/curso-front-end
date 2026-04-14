@@ -39,7 +39,7 @@
 
     <!-- Trumps -->
 
-    <script src="scripts/login.js"></script>
+    <script src="scripts/create.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
@@ -55,11 +55,34 @@
             </header>
 
             <main class="main-content">
-                <form class="left" onsubmit="login()" action="javascript:void(0)">
+                <form class="left" onsubmit="cadastrar()" action="javascript:void(0)">
+                    <div class="select-role">
+                        <h1 class="main-title">
+                            <span class="up">Olá!</span>
+                            <span class="down">Vamos criar o seu cadastro.</span>
+                        </h1>
+                        <h3 class="title">Qual o seu perfil?</h3>
+                        <div class="radio-buttons">
+                            <label class="ld-radio">
+                                Dev
+                                <input name="role" type="radio">
+                                <span class="checkmark"></span>
+                            </label>
+
+                            <label class="ld-radio">
+                                Cliente
+                                <input name="role" type="radio">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <input id="fullName" class="ld-input" type="text" placeholder="Nome completo" required>
+                    <input id="birthDate" class="ld-input" type="date" placeholder="Data de nascimento" required>
                     <input id="email" class="ld-input" type="email" placeholder="Email" required>
                     <input id="password" class="ld-input" type="password" placeholder="Senha" required>
 
-                    <button type="submit" class="ld-button">Login</button>
+                    <button type="submit" class="ld-button">Continuar</button>
                 </form>
                 <div class="right">
                     <img class="image" src="assets/image/bg-cubes.png" alt="Decoration background with 3 cubes">

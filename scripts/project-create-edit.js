@@ -10,13 +10,17 @@ const screenType = params.id ? ScreenType.Edit : ScreenType.Create;
 
 window.onload = function () {
     setScreenTypeTexts();
+    setFreelancersForSelection();
     fillInputs();
 }
 
 function fillInputs() {
     if (screenType === ScreenType.Edit) {
-        fetch(`https://69adb822b50a169ec88017c7.mockapi.io/api/projects/${params.id}`, {
-            method: 'GET'
+        fetch(`https://localhost:7261/api/projects/${params.id}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
         })
             .then(response => response.json())
             .then(project => {
@@ -39,13 +43,30 @@ function setScreenTypeTexts() {
     }
 }
 
+function setFreelancersForSelection() {
+    fetch(`https://localhost:7261/api/users/freelancers`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        .then(response => response.json())
+        .then(freelancers => {
+            freelancers.forEach(freelancer => {
+                let template = `<option value="${freelancer.id}">${freelancer.fullName}</option>`
+                document.querySelector('#freelancers').insertAdjacentHTML('beforeend', template);
+            });
+        })
+}
+
 
 function createOrEdit() {
     const payload = {
         title: document.querySelector('#title').value.trim(),
         totalCost: Number(document.querySelector('#total-cost').value.trim()),
         description: document.querySelector('#description').value.trim(),
-        idClient: localStorage.getItem('idClient')
+        idClient: localStorage.getItem('idClient'),
+        idFreelancer: document.querySelector('#freelancers').value
     };
 
     let result = validate(payload);
@@ -63,14 +84,28 @@ function createOrEdit() {
     let queryParam = screenType === ScreenType.Edit ? `${params.id}` : '';
     let httpMethod = screenType === ScreenType.Edit ? 'PUT' : 'POST';
 
-    fetch(`https://69adb822b50a169ec88017c7.mockapi.io/api/projects/${queryParam}`, {
+    fetch(`https://localhost:7261/api/projects/${queryParam}`, {
         method: httpMethod,
         body: JSON.stringify(payload),
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
     })
-        .then(response => response.json())
+        .then(response => {
+            if(!response.ok) {
+                Swal.fire({
+                    title: 'HTTP Error!',
+                    text: `Status: ${response.status}`,
+                    icon: 'error',
+                    confirmButtonText: 'Continue'
+                });
+
+                throw new Error(`HTTP Error: ${response.status}`);
+            }
+
+            return response.json();
+        })
         .then(response => {
             if (screenType === ScreenType.Edit) {
                 showSuccessMessage('Project was edited successfully!');
@@ -89,7 +124,8 @@ function validate(payload) {
         titleIsValid: payload.title !== '',
         descriptionIsValid: payload.description !== '',
         totalCostIsValid: numberIsValid(payload.totalCost),
-        idClientIsValid: numberIsValid(payload.idClient)
+        idClientIsValid: numberIsValid(payload.idClient),
+        idFreelancerIsValid: numberIsValid(payload.idFreelancer)
     }
 
     let result = {
@@ -97,7 +133,8 @@ function validate(payload) {
             validations.titleIsValid &&
             validations.totalCostIsValid &&
             validations.descriptionIsValid &&
-            validations.idClientIsValid,
+            validations.idClientIsValid &&
+            validations.idFreelancerIsValid,
         errorMessages: checkForErrorMessages(validations)
     }
 
@@ -127,6 +164,10 @@ function checkForErrorMessages(validations) {
 
     if (!validations.idClientIsValid) {
         errorMessages = errorMessages.concat('Id client is not valid!');
+    }
+
+    if (!validations.idFreelancerIsValid) {
+        errorMessages = errorMessages.concat('Freelancer is not selected!');
     }
 
     return errorMessages;
